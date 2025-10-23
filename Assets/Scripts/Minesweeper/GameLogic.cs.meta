@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1a5b07a43c2030d4495b8b576062d210
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - smileyBtn: {instanceID: 0}
+  - settingBtn: {instanceID: 0}
+  - flagmodeBtn: {instanceID: 0}
+  - smileyNormal: {fileID: -630896000373070287, guid: 3c824f20d9cd7204dbe01eddd58b4e5d, type: 3}
+  - smileyWin: {instanceID: 0}
+  - smileyLose: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
