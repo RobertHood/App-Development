@@ -26,7 +26,7 @@ public class BlockData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
         {
             cells.Add(child);
         }
-        transform.localScale = Vector3.one * 0.6f;
+        transform.localScale = Vector3.one * 0.3f;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -80,7 +80,7 @@ public class BlockData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
         if (!isLocked)
         {
             transform.position = originPos;
-            transform.localScale = Vector3.one * 0.6f;
+            transform.localScale = Vector3.one * 0.3f;
         }
     }
 

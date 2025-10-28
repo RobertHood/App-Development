@@ -9,9 +9,9 @@ public class BlockSpawner : MonoBehaviour
     
     public List<GameObject> blockArrays = new List<GameObject>();
 
-    private Vector3 firstSlot = new Vector3(-2, (float)-3.5, -1);
+    private Vector3 firstSlot = new Vector3((float)-1.5, (float)-3.5, -1);
     private Vector3 secondSlot = new Vector3(0, (float)-3.5, -1);
-    private Vector3 thirdSlot = new Vector3(2, (float)-3.5, -1);
+    private Vector3 thirdSlot = new Vector3((float)1.5, (float)-3.5, -1);
     public List<GameObject> options;
     public List<GameObject> currentBlocks = new List<GameObject>();
 

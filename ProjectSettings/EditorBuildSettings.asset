@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 81e95308dd7239a4186fed351e334fd5
   - enabled: 1
+    path: Assets/Scenes/All Game Menu.unity
+    guid: c3662e4ac77344f478895942100234c4
+  - enabled: 1
     path: Assets/Scenes/Minesweeper.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1

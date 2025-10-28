@@ -148,6 +148,7 @@ public class GridManager : MonoBehaviour
         block.transform.position += offset;
         block.transform.position = new Vector3(block.transform.position.x, block.transform.position.y, 0);
         block.transform.SetParent(placedBlock);
+        block.transform.localScale = Vector3.one * 0.9f;
         foreach (var cell in targetCells)
             SetGridPosValue(cell, 1);
         addScore(block.transform.childCount);
