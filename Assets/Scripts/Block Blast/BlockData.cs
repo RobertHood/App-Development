@@ -21,7 +21,6 @@ public class BlockData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
         col = GetComponent<Collider2D>();
         canvasGroup = GetComponent<CanvasGroup>();
         gm = GridManager.FindAnyObjectByType<GridManager>();
-        // Collect only direct child transforms as cells (exclude the root transform)
         cells.Clear();
         foreach (Transform child in transform)
         {
@@ -60,6 +59,8 @@ public class BlockData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
         transform.position = new Vector3(worldPoint.x, worldPoint.y, transform.position.z);
 
         // Preview ô hợp lệ sẽ được GridManager cập nhật trong Update()
+        if (gm != null) gm.UpdateDragPosition(worldPoint);
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)

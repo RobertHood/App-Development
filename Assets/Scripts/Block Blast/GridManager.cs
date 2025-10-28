@@ -22,9 +22,11 @@ public class GridManager : MonoBehaviour
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverUi;
     private bool isGameOver = false;
+    private Vector3 currentDragWorldPos;
+    public int minX = 0, maxX = 9;   // theo trục X
+    public int minY = 0, maxY = 9;   // theo trục Y
 
-    public int minX = -2, maxX = 5;   // theo trục X
-    public int minY = -6, maxY = 1;   // theo trục Y
+    // Lưu các ô đang highlight làm preview
     private List<Vector3Int> previousPreview = new List<Vector3Int>();
 
     private Vector3Int gridMin = new Vector3Int(-2, -6, 0);
@@ -69,24 +71,16 @@ public class GridManager : MonoBehaviour
     {
         if (objectBeingDragged == null) return;
 
-        // Lấy vị trí chuột trong world & cell
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-        mouseWorld.z = 0;
+        // Use the drag position passed from BlockData
+        Vector3 mouseWorld = currentDragWorldPos;
 
-        // Lấy preview cell positions cho toàn block
+        // Get preview cell positions for the block
         Vector3Int[] previewCells = GetPreviewCells(objectBeingDragged, mouseWorld);
 
-        // Clear highlight cũ
+        // Clear highlight old
         ClearHighlight();
 
-        // Set highlight mới (nếu hợp lệ trong board)
-        // List<Vector3Int> validCells = new List<Vector3Int>();
-        // foreach (var pos in previewCells)
-        // {
-        //     if (IsInsideGrid(pos))
-        //         validCells.Add(pos);
-        // }
-        // SetHighlight(validCells);
+        // Check if can place
         List<Vector3Int> validCells = new List<Vector3Int>(previewCells);
         bool canPlace = true;
         foreach (var cell in previewCells)
@@ -115,7 +109,7 @@ public class GridManager : MonoBehaviour
     {
         if (objectBeingDragged != block) return;
 
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+        Vector3 mouseWorld = currentDragWorldPos;
         mouseWorld.z = 0;
         Vector3Int[] targetCells = GetPreviewCells(block, mouseWorld);
 
@@ -137,7 +131,11 @@ public class GridManager : MonoBehaviour
         objectBeingDragged = null;
         ClearHighlight();
     }
-
+    public void UpdateDragPosition(Vector3 worldPos)
+    {
+        currentDragWorldPos = worldPos;
+    }
+    
     private void SnapToGrid(GameObject block, Vector3Int[] targetCells)
     {
         Vector3 firstCellCenter = tilemap.GetCellCenterWorld(targetCells[0]);
@@ -218,12 +216,19 @@ public class GridManager : MonoBehaviour
 
     private void CheckAndClear()
     {
-        var fullRows = GetFullRows();
-        var fullCols = GetFullCols();
-        
-        if (fullRows.Count > 0 || fullCols.Count > 0)
+        HashSet<Vector3Int> cellsToDelete = new HashSet<Vector3Int>();
+
+        // gom ô từ hàng đầy
+        CollectFullRows(cellsToDelete);
+
+        // gom ô từ cột đầy
+        CollectFullCols(cellsToDelete);
+
+        // xóa tất cả ô đã gom
+        if (cellsToDelete.Count > 0)
         {
-            ClearRowsAndCols(fullRows, fullCols);
+            ClearCells(cellsToDelete);
+            addScore(8 * cellsToDelete.Count / 10); // ví dụ cộng điểm tỉ lệ
         }
 
         if (!CheckAllBlockPlaceable())
@@ -233,50 +238,9 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void ClearRowsAndCols(List<int> rows, List<int> cols)
+
+    private void CollectFullRows(HashSet<Vector3Int> toDelete)
     {
-        if ((rows == null || rows.Count == 0) && (cols == null || cols.Count == 0)) return;
-
-        foreach (BlockData block in FindObjectsByType<BlockData>(FindObjectsSortMode.None))
-        {
-            var cellsCopy = new List<Transform>(block.cells);
-
-            foreach (Transform cell in cellsCopy)
-            {
-                Vector3Int cellGridPos = tilemap.WorldToCell(cell.position);
-                bool shouldRemove = (rows.Contains(cellGridPos.y) || cols.Contains(cellGridPos.x)) 
-                                    && block.transform.parent == placedBlock;
-                if (shouldRemove)
-                {
-                    Destroy(cell.gameObject);
-                    gridMap[cellGridPos] = 0;
-                    block.cells.Remove(cell);
-                }
-            }
-
-            if (block.cells.Count == 0)
-            {
-                Destroy(block.gameObject);
-            }
-        }
-
-       
-        
-        foreach (int y in rows)
-        {
-            Debug.Log("Cleared Row at Y=" + y);
-            addScore(8);
-        }
-        foreach (int x in cols)
-        {
-            Debug.Log("Cleared Col at X=" + x);
-            addScore(8);
-        }
-    }
-
-    private List<int> GetFullRows()
-    {
-        var rows = new List<int>();
         for (int y = minY; y <= maxY; y++)
         {
             bool full = true;
@@ -288,14 +252,19 @@ public class GridManager : MonoBehaviour
                     break;
                 }
             }
-            if (full) rows.Add(y);
+
+            if (full)
+            {
+                Debug.Log("Row full at y=" + y);
+                for (int x = minX; x <= maxX; x++)
+                    toDelete.Add(new Vector3Int(x, y, 0));
+            }
         }
-        return rows;
     }
 
-    private List<int> GetFullCols()
+
+    private void CollectFullCols(HashSet<Vector3Int> toDelete)
     {
-        var cols = new List<int>();
         for (int x = minX; x <= maxX; x++)
         {
             bool full = true;
@@ -307,11 +276,37 @@ public class GridManager : MonoBehaviour
                     break;
                 }
             }
-            if (full) cols.Add(x);
+
+            if (full)
+            {
+                Debug.Log("Col full at x=" + x);
+                for (int y = minY; y <= maxY; y++)
+                    toDelete.Add(new Vector3Int(x, y, 0));
+            }
         }
-        return cols;
     }
 
+
+    private void ClearCells(HashSet<Vector3Int> toDelete)
+    {
+        foreach (BlockData block in FindObjectsByType<BlockData>(FindObjectsSortMode.None))
+        {
+            var cellsCopy = new List<Transform>(block.cells);
+            foreach (Transform cell in cellsCopy)
+            {
+                Vector3Int cellPos = tilemap.WorldToCell(cell.position);
+                if (toDelete.Contains(cellPos) && block.transform.parent == placedBlock)
+                {
+                    Destroy(cell.gameObject);
+                    gridMap[cellPos] = 0;
+                    block.cells.Remove(cell);
+                }
+            }
+
+            if (block.cells.Count == 0)
+                Destroy(block.gameObject);
+        }
+    }
 
     private bool CheckAllBlockPlaceable()
     {
@@ -386,6 +381,10 @@ public class GridManager : MonoBehaviour
         }
 
             string blockList = string.Join(", ", spawnedBlocks.ConvertAll(b => b!=null?b.name:"null"));
+            if (diagBlock != null)
+            {
+                Debug.Log($"CheckAllBlockPlaceable diagnostic: first failure block={diagBlock}, anchor={diagAnchor}, failCell={diagFailCell}, gridVal={diagFailVal}, tile={diagTile}");
+            }
             return false;
     }
 
