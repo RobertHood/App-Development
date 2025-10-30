@@ -26,10 +26,10 @@ public class SudokuGrid : MonoBehaviour
 
     private void SetGridNumber()
     {
-        foreach (var square in grid_squares_)
-        {
-            square.GetComponent<GridSquare>().SetNumber(Random.Range(0, 10));
-        }
+        // foreach (var square in grid_squares_)
+        // {
+        //     square.GetComponent<GridSquare>().SetNumber(Random.Range(0, 10));
+        // }
     }
 
     private void CreateGrid()
