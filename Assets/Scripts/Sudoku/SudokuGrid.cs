@@ -11,6 +11,9 @@ public class SudokuGrid : MonoBehaviour
     public Vector2 start_position = new Vector2(0.0f, 0.0f);
     public float square_scale = 1.0f;
     private List<GameObject> grid_squares_ = new List<GameObject>();
+    private int selected_grid_data = -1;
+
+
 
     void Start()
     {
@@ -20,16 +23,28 @@ public class SudokuGrid : MonoBehaviour
         }
 
         CreateGrid();
-        SetGridNumber();
+        SetGridNumber("Default");
         
     }
 
-    private void SetGridNumber()
+    private void SetGridNumber(string level)
     {
+        selected_grid_data = Random.Range(0, SudokuData.Instance.Sudoku_game[level].Count);
+        var data = SudokuData.Instance.Sudoku_game[level][selected_grid_data];
+
+        setGridSquareData(data);
         // foreach (var square in grid_squares_)
         // {
         //     square.GetComponent<GridSquare>().SetNumber(Random.Range(0, 10));
         // }
+    }
+
+    private void setGridSquareData(SudokuData.SudokuBoardData data)
+    {
+        for (int i = 0; i < grid_squares_.Count; i++)
+        {
+            grid_squares_[i].GetComponent<GridSquare>().SetNumber(data.unsolved_data[i]);
+        }
     }
 
     private void CreateGrid()
