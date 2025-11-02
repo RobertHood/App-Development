@@ -24,7 +24,27 @@ public class GameEvents : MonoBehaviour
         }
     }
 
+    public delegate void WrongNumber();
+    public static event WrongNumber OnWrongNumber;
 
+    public static void OnWrongNumberMethod()
+    {
+        if (OnWrongNumber != null)
+        {
+            OnWrongNumber();
+        }
+    }
+
+    public delegate void GameOver();
+    public static event GameOver OnGameOver;
+
+    public static void OnGameOverMethod()
+    {
+        if (OnGameOver != null)
+        {
+            OnGameOver();
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

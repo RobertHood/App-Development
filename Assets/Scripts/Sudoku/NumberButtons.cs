@@ -13,7 +13,7 @@ public class NumberButtons : Selectable, IPointerClickHandler, ISubmitHandler, I
 
     public void OnSubmit(BaseEventData eventData)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     void Start()

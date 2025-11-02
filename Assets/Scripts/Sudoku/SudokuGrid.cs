@@ -16,7 +16,6 @@ public class SudokuGrid : MonoBehaviour
     private int selected_grid_data = -1;
 
 
-
     void Start()
     {
         if (grid_square.GetComponent<GridSquare>() == null)
@@ -53,6 +52,8 @@ public class SudokuGrid : MonoBehaviour
         for (int i = 0; i < grid_squares_.Count; i++)
         {
             grid_squares_[i].GetComponent<GridSquare>().SetNumber(data.unsolved_data[i]);
+            grid_squares_[i].GetComponent<GridSquare>().SetCorrectNumber(data.solved_data[i]);
+            grid_squares_[i].GetComponent<GridSquare>().SetHasDefaultValue(data.unsolved_data[i] != 0 && data.unsolved_data[i] == data.solved_data[i]);
         }
     }
 
@@ -105,7 +106,6 @@ public class SudokuGrid : MonoBehaviour
             }
         }
     }
-
 
 
     // Update is called once per frame

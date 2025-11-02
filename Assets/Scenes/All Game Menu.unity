@@ -1588,7 +1588,7 @@ GameObject:
   - component: {fileID: 1034716842}
   - component: {fileID: 1034716841}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Minesweeper Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2766,7 +2766,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Minesweeper
+  m_text: 'Sudoku
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6faa09a6e7037ec4e9b43f27265e5864, type: 2}
   m_sharedMaterial: {fileID: -3770569271541928232, guid: 6faa09a6e7037ec4e9b43f27265e5864, type: 2}
@@ -2858,7 +2860,7 @@ GameObject:
   - component: {fileID: 1681788136}
   - component: {fileID: 1681788135}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Sudoku Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2948,7 +2950,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6937817954938267909, guid: 496d5e19ec2eef94a9bb50980111d017, type: 3}
+  m_Sprite: {fileID: -2686536180439299944, guid: c180b8ebea4d35743949e1e58075d7b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2979,7 +2981,7 @@ GameObject:
   - component: {fileID: 1751911670}
   - component: {fileID: 1751911669}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Block Blast Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3048,7 +3050,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1751911670}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1751911670
 MonoBehaviour:
   m_ObjectHideFlags: 0
