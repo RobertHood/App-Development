@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +16,6 @@ public class SudokuGrid : MonoBehaviour
     private int selected_grid_data = -1;
 
 
-
     void Start()
     {
         if (grid_square.GetComponent<GridSquare>() == null)
@@ -22,14 +23,21 @@ public class SudokuGrid : MonoBehaviour
             Debug.LogError("no grid square");
         }
 
+        StartCoroutine(InitializeGrid());
+        
+    }
+
+    private IEnumerator InitializeGrid() //delay
+    {
+        yield return null;
+
         CreateGrid();
         SetGridNumber("Default");
-        
     }
 
     private void SetGridNumber(string level)
     {
-        selected_grid_data = Random.Range(0, SudokuData.Instance.Sudoku_game[level].Count);
+        selected_grid_data = 0;
         var data = SudokuData.Instance.Sudoku_game[level][selected_grid_data];
 
         setGridSquareData(data);
@@ -44,6 +52,8 @@ public class SudokuGrid : MonoBehaviour
         for (int i = 0; i < grid_squares_.Count; i++)
         {
             grid_squares_[i].GetComponent<GridSquare>().SetNumber(data.unsolved_data[i]);
+            grid_squares_[i].GetComponent<GridSquare>().SetCorrectNumber(data.solved_data[i]);
+            grid_squares_[i].GetComponent<GridSquare>().SetHasDefaultValue(data.unsolved_data[i] != 0 && data.unsolved_data[i] == data.solved_data[i]);
         }
     }
 
@@ -82,18 +92,20 @@ public class SudokuGrid : MonoBehaviour
 
     private void SpawnGridSquares()
     {
+        int square_index = 0;
         for (int row = 0; row < rows; row++)
         {
             for (int column = 0; column < columns; column++)
             {
                 grid_squares_.Add(Instantiate(grid_square) as GameObject);
+                grid_squares_[grid_squares_.Count - 1].GetComponent<GridSquare>().SetSquareIndex(square_index);
                 grid_squares_[grid_squares_.Count - 1].transform.SetParent(this.transform, false);
                 grid_squares_[grid_squares_.Count - 1].transform.localScale = new Vector3(square_scale, square_scale, square_scale);
 
+                square_index++;
             }
         }
     }
-
 
 
     // Update is called once per frame

@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Collections.Generic;
-using UnityEngine;
-
 public class SudokuGridData : MonoBehaviour
 {
     public static List<SudokuData.SudokuBoardData> GetData(int k = 40)
