@@ -399,4 +399,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9323541f3ca3e7b1f8491857925909f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pipes
-  speed: 5
+  speed: 1.5
