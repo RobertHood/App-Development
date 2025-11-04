@@ -17,24 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Block Blast.unity
     guid: 9370a5fb1ec7f964e96ef4611c172b58
-  - enabled: 1
-    path: Assets/Scenes/Flappy Bird.unity
-    guid: 5fdf1f43c8ded6829876a085c35ad3ca
-  - enabled: 1
-    path: Assets/Scenes/Block Blast - Instruction Screen.unity
-    guid: 9132df9eb4428d947921ee30de7d084b
-  - enabled: 1
-    path: Assets/Scenes/Flappy Bird - Instruction Screen.unity
-    guid: 9289b92300078ba45a071cf341b137a9
-  - enabled: 1
-    path: Assets/Scenes/Minesweeper - Instruction Screen.unity
-    guid: a5682532d9b3e2b4f931f6408d7939d1
-  - enabled: 1
-    path: Assets/Scenes/Sudoku - Instruction Screen.unity
-    guid: a591cc3a5b0f27c4c96fa7fd67f32266
-  - enabled: 1
-    path: Assets/Scenes/Sudoku.unity
-    guid: fa7b567c13ca3de4ab161035ee8dfa64
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -272,7 +272,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d8af7b8ce5f391a43ab588eec900b627, type: 3}
+    m_Font: {fileID: 12800000, guid: 0b3c25f47c3ed38b798b714ea6bb1580, type: 3}
     m_FontSize: 300
     m_FontStyle: 0
     m_BestFit: 0
@@ -1051,7 +1051,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 47a1c54c1427e10458e1e21315a00666, type: 3}
   - {fileID: 21300000, guid: 477a76ff29832b2499b9244de7070326, type: 3}
   gravity: -9.8
-  strength: 4
+  strength: 5
 --- !u!58 &1136975769
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1170,7 +1170,7 @@ SpriteRenderer:
   m_Size: {x: 0.7083333, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1136975772
@@ -1182,7 +1182,7 @@ Transform:
   m_GameObject: {fileID: 1136975767}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.935, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1319,7 +1319,7 @@ Transform:
   m_GameObject: {fileID: 1862288695}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.29, y: 0, z: 0}
+  m_LocalPosition: {x: 12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1338,8 +1338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   prefab: {fileID: 8138150058788565104, guid: 3760632d958c6e486b8dad5b900f45dc, type: 3}
-  spawnRate: 2
-  minHeight: -2
+  spawnRate: 1.5
+  minHeight: -1
   maxHeight: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
