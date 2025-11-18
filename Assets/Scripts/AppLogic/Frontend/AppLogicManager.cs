@@ -64,4 +64,13 @@ public class AppLogicManager : MonoBehaviour
     {
         SceneManager.LoadScene("All Game Menu");
     }
+    public void EnableLeaderboardUI(GameObject leaderboardPanel)
+    {
+        leaderboardPanel.SetActive(true);
+    }
+    public void DisableLeaderboardUI(GameObject leaderboardPanel)
+    {
+        leaderboardPanel.SetActive(false);
+    }
+
 }
