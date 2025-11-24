@@ -3,6 +3,7 @@ using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayFabLogin : MonoBehaviour
 {
@@ -51,7 +52,8 @@ public class PlayFabLogin : MonoBehaviour
     {
         isProcessing = false;
         Debug.Log("Login successful. PlayFabId: " + result.PlayFabId);
-        // TODO: proceed to your next scene / hide login UI
+        
+        SceneManager.LoadScene("All Game Menu");
     }
 
     private void OnLoginFailure(PlayFabError error)

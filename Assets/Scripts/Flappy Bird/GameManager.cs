@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject playButton;
     public GameObject gameOver;
     public GameObject getReady;
+    public PlayFabLeaderBoard PlayFabLeaderBoard;
     public Text scoreText;
     public Player player;
 
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
     public void GameOver(){
         gameOver.SetActive(true);
         playButton.SetActive(true);
+        PlayFabLeaderBoard.sendLeaderboard(score);
         Pause();
     }
 
