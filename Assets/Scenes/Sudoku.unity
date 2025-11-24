@@ -410,15 +410,15 @@ RectTransform:
   m_GameObject: {fileID: 114712441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.87, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 993846010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030518, y: 10}
-  m_SizeDelta: {x: 1105, y: 1128}
+  m_AnchoredPosition: {x: 3.5, y: 5.3}
+  m_SizeDelta: {x: 1106, y: 1106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114712443
 MonoBehaviour:
@@ -1169,7 +1169,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 860834765}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1458076259}
+        m_TargetAssemblyTypeName: AppLogic, Assembly-CSharp
+        m_MethodName: Replay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &860834765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1764,7 +1776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 195}
   m_SizeDelta: {x: 50, y: 104}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1389801025
@@ -1975,7 +1987,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1411983527}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1458076259}
+        m_TargetAssemblyTypeName: AppLogic, Assembly-CSharp
+        m_MethodName: BackToGameScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1411983527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2027,6 +2051,7 @@ GameObject:
   - component: {fileID: 1458076254}
   - component: {fileID: 1458076257}
   - component: {fileID: 1458076258}
+  - component: {fileID: 1458076259}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2169,6 +2194,18 @@ MonoBehaviour:
   - {fileID: 817184984}
   - {fileID: 599051074}
   gameOverPopup: {fileID: 525439595}
+--- !u!114 &1458076259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458076253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece4332a2121d1d439c34eeeea620b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AppLogic
 --- !u!1 &1469869128
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,6 +2340,7 @@ MonoBehaviour:
   grid_square: {fileID: 1736435105975917748, guid: bbbf5639596d1dc4481b162e1bd4ad0d, type: 3}
   start_position: {x: -432, y: 442}
   square_scale: 0.9
+  square_gap: 5
 --- !u!222 &1581715350
 CanvasRenderer:
   m_ObjectHideFlags: 0
