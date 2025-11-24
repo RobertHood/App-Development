@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.Collections;
+using PlayFab.Internal;
 
 
 public class GameLogic : MonoBehaviour
 {
-    public int width = 16;
+    public int width = 10;
     public int height = 16;
-    public int mineCount = 32;
+    public int mineCount = 10;
 
     public Button smileyBtn;
     public Button settingBtn;
@@ -22,6 +23,8 @@ public class GameLogic : MonoBehaviour
     public TMP_Text flagcountTxt;
     public TMP_Text timerTxt;
     
+    public GameObject settingsPanel;
+
     private float timer;
     private bool timerRunning;
 
@@ -41,6 +44,15 @@ public class GameLogic : MonoBehaviour
     {
         NewGame();
         smileyBtn?.onClick.AddListener(NewGame);
+        settingBtn.onClick.AddListener(() => settingsPanel.SetActive(true));
+    }
+
+
+    public void NewGameWithDiff(int diff)
+    {
+        mineCount = diff;
+        Debug.Log("Difficulty changed: " + diff);
+        NewGame();
     }
 
     private void NewGame()
@@ -55,7 +67,16 @@ public class GameLogic : MonoBehaviour
         timerRunning = true;
         flagModeOn = false;
 
-        Camera.main.transform.position = new Vector3(width / 4f, height / 4f, -10f);
+        Camera.main.orthographic = true;
+        float aspect = (float)Screen.width / Screen.height;
+        float boardWidth = width;
+        float boardHeight = height;
+        float size = Mathf.Max(boardWidth / (2f * aspect), boardHeight / 2f);
+        Camera.main.orthographicSize = size;
+        
+        Camera.main.transform.position = new Vector3(width / 2f, height / 2f, -10f);
+
+        board.transform.position = new Vector3(0, 0, 0);
         board.Draw(state);
         CountFlags();
         UpdateTimerUI();
@@ -164,37 +185,42 @@ public class GameLogic : MonoBehaviour
                 timer += Time.deltaTime;
                 UpdateTimerUI();
             }
-            if (Input.GetMouseButtonDown(1))
+            if (Input.touchCount > 0)
             {
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Flag(worldPosition);
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    Vector3 wp = Camera.main.ScreenToWorldPoint(touch.position);
+                    if (flagModeOn)
+                        Flag(wp);
+                    else
+                        Reveal(wp);
+                }
+                return; 
             }
-            else if (Input.GetMouseButtonDown(0))
+
+            if (Input.GetMouseButtonDown(0))
             {
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 wp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 if (flagModeOn)
                 {
-                    Flag(worldPosition);
+                    Debug.Log("touch flag");
+                    Flag(wp);
                 }
                 else
                 {
-                    Reveal(worldPosition);
+                    Debug.Log("touch reveal");
+                    Reveal(wp);
                 }
             }
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            else if (Input.GetMouseButtonDown(1)) 
             {
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-                if (flagModeOn)
-                {
-                    Flag(worldPosition);
-                }
-                else
-                {
-                    Reveal(worldPosition);
-                }
+                Vector3 wp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Flag(wp);
             }
         }
     }
+
 
     private void ToggleFlagMode()
     {
