@@ -72,5 +72,21 @@ public class AppLogicManager : MonoBehaviour
     {
         leaderboardPanel.SetActive(false);
     }
+    public void EnableLoginPanel(GameObject loginPanel)
+    {
+        loginPanel.SetActive(true);
+    }
+    public void DisableLoginPanel(GameObject loginPanel)
+    {
+        loginPanel.SetActive(false);
+    }
+    public void EnableRegisterPanel(GameObject registerPanel)
+    {
+        registerPanel.SetActive(true);
+    }
+    public void DisableRegisterPanel(GameObject registerPanel)
+    {
+        registerPanel.SetActive(false);
+    }
 
 }
