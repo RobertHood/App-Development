@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SudokuGridData : MonoBehaviour
 {
-    public static List<SudokuData.SudokuBoardData> GetData(int k = 40)
+    public static List<SudokuData.SudokuBoardData> GetData(int k)
     {
         List<SudokuData.SudokuBoardData> data = new List<SudokuData.SudokuBoardData>();
 
@@ -193,6 +193,9 @@ public class SudokuData : MonoBehaviour
     }
     void Start()
     {
-        Sudoku_game.Add("Default", SudokuGridData.GetData());
+        Sudoku_game.Add("Easy", SudokuGridData.GetData(20));
+        Sudoku_game.Add("Medium", SudokuGridData.GetData(30));
+        Sudoku_game.Add("Hard", SudokuGridData.GetData(40));
+        Sudoku_game.Add("Insane", SudokuGridData.GetData(50));
     }
 }

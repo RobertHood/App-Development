@@ -12,6 +12,7 @@ public class SudokuGrid : MonoBehaviour
     public GameObject grid_square;
     public Vector2 start_position = new Vector2(0.0f, 0.0f);
     public float square_scale = 1.0f;
+    public float square_gap = 0.1f;
     private List<GameObject> grid_squares_ = new List<GameObject>();
     private int selected_grid_data = -1;
 
@@ -32,13 +33,47 @@ public class SudokuGrid : MonoBehaviour
         yield return null;
 
         CreateGrid();
-        SetGridNumber("Default");
+
+        string mode = "Easy";
+        if (AppLogic.Instance != null)
+        {
+            var gm = AppLogic.Instance.GetGameMode();
+            if (!string.IsNullOrWhiteSpace(gm))
+                mode = gm;
+        }
+
+        if (SudokuData.Instance == null || !SudokuData.Instance.Sudoku_game.ContainsKey(mode))
+        {
+            Debug.LogWarning($"Difficulty '{mode}' not available, falling back to Easy.");
+            mode = "Easy";
+        }
+
+        SetGridNumber(mode);
     }
 
     private void SetGridNumber(string level)
     {
-        selected_grid_data = 0;
-        var data = SudokuData.Instance.Sudoku_game[level][selected_grid_data];
+        if (SudokuData.Instance == null)
+        {
+            Debug.LogError("SudokuData.Instance is null - cannot set grid numbers.");
+            return;
+        }
+
+        if (!SudokuData.Instance.Sudoku_game.ContainsKey(level))
+        {
+            Debug.LogWarning($"Level '{level}' not found. Falling back to Easy.");
+            level = "Easy";
+        }
+
+        var list = SudokuData.Instance.Sudoku_game[level];
+        if (list == null || list.Count == 0)
+        {
+            Debug.LogWarning($"No boards defined for level '{level}'. Using Easy first board.");
+            list = SudokuData.Instance.Sudoku_game["Easy"];
+        }
+
+        selected_grid_data = Mathf.Clamp(selected_grid_data, 0, Math.Max(0, list.Count - 1));
+        var data = list[selected_grid_data];
 
         setGridSquareData(data);
         // foreach (var square in grid_squares_)
@@ -68,6 +103,9 @@ public class SudokuGrid : MonoBehaviour
     {
         var square_rect = grid_squares_[0].GetComponent<RectTransform>();
         Vector2 offset = new Vector2();
+        Vector2 square_gap_number = new Vector2(0.0f,0.0f);
+        bool row_moved = false;
+
         offset.x = square_rect.rect.width * square_rect.transform.localScale.x + square_offset; // second square is offsetted by the amount equals to the size of the first square
         offset.y = square_rect.rect.height * square_rect.transform.localScale.y + square_offset;
 
@@ -80,10 +118,23 @@ public class SudokuGrid : MonoBehaviour
             {
                 row_number++;
                 column_number = 0;
+                square_gap_number.x = 0;
+                row_moved = false;
             }
 
-            var pos_x_offset = offset.x * column_number;
-            var pos_y_offset = offset.y * row_number;
+            var pos_x_offset = offset.x * column_number + (square_gap_number.x * square_gap);
+            var pos_y_offset = offset.y * row_number + (square_gap_number.y * square_gap);
+            if (column_number > 0 && column_number % 3 == 0)
+            {
+                square_gap_number.x++;
+                pos_x_offset+=square_gap; 
+            }
+            if (row_number > 0 && row_number % 3 == 0 && row_moved == false)
+            {
+                row_moved = true;
+                square_gap_number.y++;
+                pos_y_offset+=square_gap;
+            } 
 
             square.GetComponent<RectTransform>().anchoredPosition = new Vector2(start_position.x + pos_x_offset, start_position.y - pos_y_offset);
             column_number++;

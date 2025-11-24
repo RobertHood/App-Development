@@ -8891,6 +8891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1881621205}
   - component: {fileID: 1881621204}
+  - component: {fileID: 1881621206}
   m_Layer: 0
   m_Name: '[PlayFab]'
   m_TagString: Untagged
@@ -8928,6 +8929,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1881621206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881621203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb12b8bcaf063f499c2ec5a240bda70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayFabRegister
+  usernameInput: {fileID: 1268343114}
+  passwordInput: {fileID: 597103807}
+  confirmPasswordInput: {fileID: 154356295}
+  emailInput: {fileID: 771735995}
+  registerButton: {fileID: 1385869172}
 --- !u!1 &1891864055
 GameObject:
   m_ObjectHideFlags: 0
