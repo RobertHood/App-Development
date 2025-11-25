@@ -43,7 +43,7 @@ public class PlayFabLeaderBoard : MonoBehaviour
             MaxResultsCount = 10
         };
 
-        PlayFabClientAPI.GetLeaderboard(request, OnGetLeaderboardSuccess, OnGetLeaderboardFailure);
+        // PlayFabClientAPI.GetLeaderboard(request, OnGetLeaderboardSuccess, OnGetLeaderboardFailure);
     }
 
     void OnGetLeaderboardGet(GetLeaderboardResult result)
