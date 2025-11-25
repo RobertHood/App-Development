@@ -41,6 +41,8 @@ public class GridManager : MonoBehaviour
     public GameObject blockSpawner;
     private BlockSpawner bs;
     // public GameObject augmentUI;
+
+    public PlayFabLeaderBoard PlayFabLeaderBoard;
     private void Awake()
     {
 
@@ -396,7 +398,8 @@ public class GridManager : MonoBehaviour
 
         AudioManager.Instance?.PlayGameOver();
         if (gameOverUi != null) {
-            gameOverUi.SetActive(true); 
+            gameOverUi.SetActive(true);
+            PlayFabLeaderBoard.sendLeaderboard(playerScore, "block blast"); 
         }
         else
             Debug.LogWarning("GridManager: GameOver called but 'gameOverUi' is not assigned.");

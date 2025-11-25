@@ -425,6 +425,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375011046}
   m_CullTransparentMesh: 1
+--- !u!1 &490419806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 490419808}
+  - component: {fileID: 490419807}
+  m_Layer: 0
+  m_Name: PlayFabLeaderBoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &490419807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490419806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd2f2cf65c5f7542907cfccf67c02ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayFabLeaderBoard
+--- !u!4 &490419808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490419806}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 356.1031, y: 869.2226, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,6 +2087,7 @@ MonoBehaviour:
   maxY: 1
   placedBlock: {fileID: 1327233221}
   blockSpawner: {fileID: 908978294}
+  PlayFabLeaderBoard: {fileID: 490419807}
 --- !u!19719996 &1533061897
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -2092,7 +2137,6 @@ GameObject:
   - component: {fileID: 1906288243}
   - component: {fileID: 1906288245}
   - component: {fileID: 1906288244}
-  - component: {fileID: 1906288246}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -2218,18 +2262,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906288242}
   m_CullTransparentMesh: 1
---- !u!114 &1906288246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906288242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ef8678809119f40864cefad8a7b97d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Scoring
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2242,3 +2274,4 @@ SceneRoots:
   - {fileID: 1327233221}
   - {fileID: 908978296}
   - {fileID: 271307587}
+  - {fileID: 490419808}

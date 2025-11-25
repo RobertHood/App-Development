@@ -3,6 +3,7 @@ using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayFabLogin : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class PlayFabLogin : MonoBehaviour
     public TMP_InputField passwordInput;
     public Button loginButton;
     // removed statusText UI field — using console logging instead
-
+    public TextMeshProUGUI usernameInfo;
+    public TextMeshProUGUI uid;
+    public GameObject loginPanel;
+    private string lastUsername;
     private bool isProcessing = false;
 
     public void Start()
@@ -40,7 +44,7 @@ public class PlayFabLogin : MonoBehaviour
             Debug.LogWarning("Enter username and password.");
             return;
         }
-
+        lastUsername = username;
         isProcessing = true;
         Debug.Log("Logging in...");
         var request = new LoginWithPlayFabRequest { Username = username, Password = password };
@@ -51,7 +55,11 @@ public class PlayFabLogin : MonoBehaviour
     {
         isProcessing = false;
         Debug.Log("Login successful. PlayFabId: " + result.PlayFabId);
-        // TODO: proceed to your next scene / hide login UI
+        
+        usernameInfo.text = lastUsername;
+        uid.text = "UID: " + result.PlayFabId;
+        loginPanel.SetActive(false);
+        PlayFabManager.Instance.SetLogin(result); 
     }
 
     private void OnLoginFailure(PlayFabError error)
