@@ -399,7 +399,7 @@ public class GridManager : MonoBehaviour
         AudioManager.Instance?.PlayGameOver();
         if (gameOverUi != null) {
             gameOverUi.SetActive(true);
-            PlayFabLeaderBoard.sendLeaderboard(score, "block blast"); 
+            PlayFabLeaderBoard.sendLeaderboard(playerScore, "block blast"); 
         }
         else
             Debug.LogWarning("GridManager: GameOver called but 'gameOverUi' is not assigned.");

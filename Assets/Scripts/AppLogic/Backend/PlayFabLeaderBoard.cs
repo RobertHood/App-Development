@@ -9,11 +9,26 @@ public class PlayFabLeaderBoard : MonoBehaviour
 {
     public void sendLeaderboard(int score, string leaderboardName)
     {
-        if(!PlayFabManager.Instance.IsLoggedIn)
+        // guard: ensure manager exists and user is logged in
+        if (PlayFabManager.Instance == null)
+        {
+            Debug.LogWarning("PlayFabManager.Instance is null. Cannot send leaderboard.");
+            return;
+        }
+
+        if (!PlayFabManager.Instance.IsLoggedIn)
         {
             Debug.LogWarning("Cannot send leaderboard score: not logged in.");
             return;
         }
+
+        // guard: ensure a valid statistic name
+        if (string.IsNullOrWhiteSpace(leaderboardName))
+        {
+            Debug.LogWarning("Leaderboard name is empty; defaulting to 'Score'.");
+            leaderboardName = "Score";
+        }
+
         var request = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate>
