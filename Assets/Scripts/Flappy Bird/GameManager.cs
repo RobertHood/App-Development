@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     public void GameOver(){
         gameOver.SetActive(true);
         playButton.SetActive(true);
-        PlayFabLeaderBoard.sendLeaderboard(score);
+        PlayFabLeaderBoard.sendLeaderboard(score, "flappy bird");
         Pause();
     }
 

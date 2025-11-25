@@ -14,6 +14,7 @@ public class PlayFabLogin : MonoBehaviour
     // removed statusText UI field — using console logging instead
     public TextMeshProUGUI usernameInfo;
     public TextMeshProUGUI uid;
+    public GameObject loginPanel;
     private string lastUsername;
     private bool isProcessing = false;
 
@@ -57,6 +58,8 @@ public class PlayFabLogin : MonoBehaviour
         
         usernameInfo.text = lastUsername;
         uid.text = "UID: " + result.PlayFabId;
+        loginPanel.SetActive(false);
+        PlayFabManager.Instance.SetLogin(result); 
     }
 
     private void OnLoginFailure(PlayFabError error)

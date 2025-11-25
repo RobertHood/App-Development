@@ -7,15 +7,20 @@ using System.Collections.Generic;
 
 public class PlayFabLeaderBoard : MonoBehaviour
 {
-    public void sendLeaderboard(int score)
+    public void sendLeaderboard(int score, string leaderboardName)
     {
+        if(!PlayFabManager.Instance.IsLoggedIn)
+        {
+            Debug.LogWarning("Cannot send leaderboard score: not logged in.");
+            return;
+        }
         var request = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate>
             {
                 new StatisticUpdate
                 {
-                    StatisticName = "Score",
+                    StatisticName = leaderboardName,
                     Value = score
                 }
             }
@@ -43,7 +48,12 @@ public class PlayFabLeaderBoard : MonoBehaviour
             MaxResultsCount = 10
         };
 
-        // PlayFabClientAPI.GetLeaderboard(request, OnGetLeaderboardSuccess, OnGetLeaderboardFailure);
+        PlayFabClientAPI.GetLeaderboard(request, OnGetLeaderboardGet, OnError);
+    }
+
+    void OnError(PlayFabError error)
+    {
+        Debug.LogWarning("Error retrieving leaderboard: " + error.GenerateErrorReport());
     }
 
     void OnGetLeaderboardGet(GetLeaderboardResult result)
