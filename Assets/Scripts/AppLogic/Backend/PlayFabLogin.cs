@@ -12,7 +12,9 @@ public class PlayFabLogin : MonoBehaviour
     public TMP_InputField passwordInput;
     public Button loginButton;
     // removed statusText UI field — using console logging instead
-
+    public TextMeshProUGUI usernameInfo;
+    public TextMeshProUGUI uid;
+    private string lastUsername;
     private bool isProcessing = false;
 
     public void Start()
@@ -41,7 +43,7 @@ public class PlayFabLogin : MonoBehaviour
             Debug.LogWarning("Enter username and password.");
             return;
         }
-
+        lastUsername = username;
         isProcessing = true;
         Debug.Log("Logging in...");
         var request = new LoginWithPlayFabRequest { Username = username, Password = password };
@@ -53,7 +55,8 @@ public class PlayFabLogin : MonoBehaviour
         isProcessing = false;
         Debug.Log("Login successful. PlayFabId: " + result.PlayFabId);
         
-        SceneManager.LoadScene("All Game Menu");
+        usernameInfo.text = lastUsername;
+        uid.text = "UID: " + result.PlayFabId;
     }
 
     private void OnLoginFailure(PlayFabError error)
