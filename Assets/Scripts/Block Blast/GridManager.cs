@@ -23,8 +23,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUi;
     private bool isGameOver = false;
     private Vector3 currentDragWorldPos;
-    public int minX = 0, maxX = 9;   // theo trục X
-    public int minY = 0, maxY = 9;   // theo trục Y
+    public int minX , maxX;  
+    public int minY, maxY ;   
 
     // Lưu các ô đang highlight làm preview
     private List<Vector3Int> previousPreview = new List<Vector3Int>();
@@ -410,6 +410,11 @@ public class GridManager : MonoBehaviour
         UpdateScore();
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ToHomeScreen()
+    {
+        SceneManager.LoadScene("All Game Menu");
     }
 
 

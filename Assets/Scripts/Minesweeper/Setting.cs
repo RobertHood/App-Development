@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class Setting : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Setting : MonoBehaviour
     public Button easyButton;
     public Button mediumButton;
     public Button hardButton;
+    public Button toHomeButton;
 
     [Header("Game Logic")]
     public GameLogic gameLogic;
@@ -19,6 +21,7 @@ public class Setting : MonoBehaviour
         easyButton.onClick.AddListener(() => OnDifficultyClick(10));
         mediumButton.onClick.AddListener(() => OnDifficultyClick(20));
         hardButton.onClick.AddListener(() => OnDifficultyClick(30));
+        toHomeButton.onClick.AddListener(ToHomeClick);
     }
 
     private void OnBackClick()
@@ -31,6 +34,11 @@ public class Setting : MonoBehaviour
         gameLogic.NewGameWithDiff(diff);
 
         gameObject.SetActive(false); // Ẩn panel
+    }
+
+    private void ToHomeClick()
+    {
+        SceneManager.LoadScene("All Game Menu");
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
