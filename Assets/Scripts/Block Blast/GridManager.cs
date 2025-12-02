@@ -417,7 +417,15 @@ public class GridManager : MonoBehaviour
         SceneManager.LoadScene("All Game Menu");
     }
 
+    public void Continue(GameObject pauseUI)
+    {
+        pauseUI.SetActive(false);
+    }
 
+    public void CallPauseUI(GameObject pauseUI)
+    {
+        pauseUI.SetActive(true);
+    }
     public void ResetBoard()
     {
 

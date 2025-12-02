@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     private int score;
     public GameObject playButton;
+    public GameObject homeButton;
     public GameObject gameOver;
     public GameObject getReady;
     public PlayFabLeaderBoard PlayFabLeaderBoard;
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
         
         getReady.SetActive(false);
         playButton.SetActive(false);
+        homeButton.SetActive(false);
         gameOver.SetActive(false);
 
         Time.timeScale = 1f;
@@ -40,9 +43,16 @@ public class GameManager : MonoBehaviour
         player.enabled = false;
     }
 
+    public void ToHomeScreen()
+    {
+        SceneManager.LoadScene("All Game Menu");
+    }
+
+
     public void GameOver(){
         gameOver.SetActive(true);
         playButton.SetActive(true);
+        homeButton.SetActive(true);
         PlayFabLeaderBoard.sendLeaderboard(score, "flappy bird");
         Pause();
     }
