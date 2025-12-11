@@ -13,6 +13,7 @@ public class GameLogic : MonoBehaviour
     public int height = 16;
     public int mineCount = 10;
 
+    public PlayFabLeaderBoard PlayFabLeaderBoard;
     public Button smileyBtn;
     public Button settingBtn;
     public Button flagModeBtn;
@@ -358,8 +359,9 @@ public class GameLogic : MonoBehaviour
         Debug.Log("You win!");
         gameover = true;
         timerRunning = false;
-        
         smileyImg.sprite = smileyWin;
+        int finalTime = Mathf.FloorToInt(timer);
+        PlayFabLeaderBoard.sendLeaderboard(finalTime, "minesweeper"); 
     }
 
     private void Explode(Cell cell)
