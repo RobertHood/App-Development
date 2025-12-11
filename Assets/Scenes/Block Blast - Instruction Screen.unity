@@ -807,7 +807,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1722282885}
         m_TargetAssemblyTypeName: ScrollSnapController, Assembly-CSharp
-        m_MethodName: PrevCard
+        m_MethodName: OnClickLeft
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1302,7 +1302,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1722282885}
         m_TargetAssemblyTypeName: ScrollSnapController, Assembly-CSharp
-        m_MethodName: NextCard
+        m_MethodName: OnClickRight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1983,12 +1983,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollSnapController
   scrollRect: {fileID: 1722282884}
-  content: {fileID: 2025751869}
-  cards:
-  - {fileID: 783802775}
-  - {fileID: 1196947170}
-  - {fileID: 960967052}
-  smoothSpeed: 10
+  hlg: {fileID: 2025751871}
+  card: {fileID: 783802774}
+  snapDuration: 0.1
 --- !u!1 &1781943245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2573,7 +2570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 980.5652, y: 0}
+  m_AnchoredPosition: {x: 980.56537, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2025751870
