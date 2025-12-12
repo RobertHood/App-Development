@@ -1500,7 +1500,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 588285696}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722282885}
+        m_TargetAssemblyTypeName: ScrollSnapController, Assembly-CSharp
+        m_MethodName: OnClickLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &588285696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2332,7 +2344,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1021051700}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722282885}
+        m_TargetAssemblyTypeName: ScrollSnapController, Assembly-CSharp
+        m_MethodName: OnClickRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1021051700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3454,6 +3478,7 @@ GameObject:
   - component: {fileID: 1722282881}
   - component: {fileID: 1722282884}
   - component: {fileID: 1722282883}
+  - component: {fileID: 1722282885}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -3563,6 +3588,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1722282885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722282879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf46bc1cf87448a48bf8ccc510cd7358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScrollSnapController
+  scrollRect: {fileID: 1722282884}
+  hlg: {fileID: 2025751871}
+  card: {fileID: 783802774}
+  snapDuration: 0.1
 --- !u!1 &1781943245
 GameObject:
   m_ObjectHideFlags: 0

@@ -61,7 +61,6 @@ public class GridManager : MonoBehaviour
     }
     public void addScore(int scoreToAdd)
     {
-
         playerScore += scoreToAdd * scoreMultiplier;
         score.text = playerScore.ToString();
     }
