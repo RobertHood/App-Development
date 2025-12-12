@@ -10,15 +10,9 @@ public class PlayFabLeaderBoard : MonoBehaviour
     public void sendLeaderboard(int score, string leaderboardName)
     {
         // guard: ensure manager exists and user is logged in
-        if (PlayFabManager.Instance == null)
+        if (PlayFabManager.Instance == null || !PlayFabManager.Instance.IsLoggedIn)
         {
-            Debug.LogWarning("PlayFabManager.Instance is null. Cannot send leaderboard.");
-            return;
-        }
-
-        if (!PlayFabManager.Instance.IsLoggedIn)
-        {
-            Debug.LogWarning("Cannot send leaderboard score: not logged in.");
+            Debug.LogWarning("User is playing as guest → leaderboard not sent.");
             return;
         }
 

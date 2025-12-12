@@ -8,6 +8,7 @@ public class Clock : MonoBehaviour
     int minute_ = 0;
     int second_ = 0;
     private TextMeshProUGUI textClock;
+    public PlayFabLeaderBoard playFabLeaderBoard;
     float delta_time;
     private bool stopClock = false;
 
@@ -43,6 +44,8 @@ public class Clock : MonoBehaviour
     public void OnGameOver()
     {
         stopClock = true;
+        int finalTimeInSeconds = (int)delta_time;
+        playFabLeaderBoard.sendLeaderboard(finalTimeInSeconds, "sudoku");
     }
 
     private void OnEnable()
