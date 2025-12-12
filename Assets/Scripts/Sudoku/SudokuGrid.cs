@@ -28,7 +28,37 @@ public class SudokuGrid : MonoBehaviour
         
     }
 
-    private IEnumerator InitializeGrid() //delay
+    private void OnEnable()
+    {
+        GameEvents.OnBoardChanged += CheckForWin;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnBoardChanged -= CheckForWin;
+    }
+
+    private void CheckForWin()
+    {
+        if (grid_squares_ == null || grid_squares_.Count == 0) return;
+
+        foreach (var square in grid_squares_)
+        {
+            var gs = square.GetComponent<GridSquare>();
+            if (gs == null) return;
+            if (!gs.GetHasDefaultValue())
+            {
+
+                return;
+            }
+        }
+
+
+        Debug.Log("Sudoku solved! Triggering win event.");
+        GameEvents.OnGameWonMethod();
+    }
+
+    private IEnumerator InitializeGrid() 
     {
         yield return null;
 
@@ -106,7 +136,7 @@ public class SudokuGrid : MonoBehaviour
         Vector2 square_gap_number = new Vector2(0.0f,0.0f);
         bool row_moved = false;
 
-        offset.x = square_rect.rect.width * square_rect.transform.localScale.x + square_offset; // second square is offsetted by the amount equals to the size of the first square
+        offset.x = square_rect.rect.width * square_rect.transform.localScale.x + square_offset; 
         offset.y = square_rect.rect.height * square_rect.transform.localScale.y + square_offset;
 
         int column_number = 0;

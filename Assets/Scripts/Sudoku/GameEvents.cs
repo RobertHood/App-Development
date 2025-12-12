@@ -45,6 +45,30 @@ public class GameEvents : MonoBehaviour
             OnGameOver();
         }
     }
+    
+
+    public delegate void BoardChanged();
+    public static event BoardChanged OnBoardChanged;
+
+    public static void OnBoardChangedMethod()
+    {
+        if (OnBoardChanged != null)
+        {
+            OnBoardChanged();
+        }
+    }
+
+
+    public delegate void GameWon();
+    public static event GameWon OnGameWon;
+
+    public static void OnGameWonMethod()
+    {
+        if (OnGameWon != null)
+        {
+            OnGameWon();
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

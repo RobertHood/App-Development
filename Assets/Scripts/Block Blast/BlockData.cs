@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-// Quản lý dữ liệu và tương tác của 1 block (kéo thả)
 public class BlockData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private CanvasGroup canvasGroup;
@@ -57,8 +56,6 @@ public class BlockData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
         Vector3 worldPoint = Camera.main.ScreenToWorldPoint(eventData.position);
         worldPoint.z = 0f;
         transform.position = new Vector3(worldPoint.x, worldPoint.y, transform.position.z);
-
-        // Preview ô hợp lệ sẽ được GridManager cập nhật trong Update()
         if (gm != null) gm.UpdateDragPosition(worldPoint);
         
     }
@@ -76,7 +73,6 @@ public class BlockData : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
         {
             gm.EndDrag(this.gameObject);
         }
-        // Nếu block chưa được lock (drop outside) → reset về vị trí gốc
         if (!isLocked)
         {
             transform.position = originPos;

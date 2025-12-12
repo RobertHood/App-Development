@@ -23,10 +23,9 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUi;
     private bool isGameOver = false;
     private Vector3 currentDragWorldPos;
-    public int minX , maxX;  
-    public int minY, maxY ;   
+    public int minX , maxX;
+    public int minY, maxY;
 
-    // Lưu các ô đang highlight làm preview
     private List<Vector3Int> previousPreview = new List<Vector3Int>();
 
     private Vector3Int gridMin = new Vector3Int(-2, -6, 0);
@@ -36,16 +35,13 @@ public class GridManager : MonoBehaviour
 
     private Dictionary<Vector3Int, int> gridMap = new Dictionary<Vector3Int, int>();
 
-    // Đối tượng đang được kéo
     private GameObject objectBeingDragged;
     public GameObject blockSpawner;
     private BlockSpawner bs;
-    // public GameObject augmentUI;
 
     public PlayFabLeaderBoard PlayFabLeaderBoard;
     private void Awake()
     {
-
         if (gameOverUi != null)
             gameOverUi.SetActive(false);
     }
@@ -72,16 +68,12 @@ public class GridManager : MonoBehaviour
     {
         if (objectBeingDragged == null) return;
 
-        // Use the drag position passed from BlockData
         Vector3 mouseWorld = currentDragWorldPos;
 
-        // Get preview cell positions for the block
         Vector3Int[] previewCells = GetPreviewCells(objectBeingDragged, mouseWorld);
 
-        // Clear highlight old
         ClearHighlight();
 
-        // Check if can place
         List<Vector3Int> validCells = new List<Vector3Int>(previewCells);
         bool canPlace = true;
         foreach (var cell in previewCells)
@@ -99,13 +91,11 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // --- Khi bắt đầu drag block ---
     public void StartDrag(GameObject block)
     {
         objectBeingDragged = block;
     }
 
-    // --- Khi thả block ---
     public void EndDrag(GameObject block)
     {
         if (objectBeingDragged != block) return;
@@ -114,12 +104,10 @@ public class GridManager : MonoBehaviour
         mouseWorld.z = 0;
         Vector3Int[] targetCells = GetPreviewCells(block, mouseWorld);
 
-        // Kiểm tra hợp lệ
         foreach (var cell in targetCells)
         {
             if (!IsInsideGrid(cell) || !IsCellFree(cell))
             {
-                // Trả block về vị trí cũ
                 block.transform.position = block.GetComponent<BlockData>().originPos;
                 objectBeingDragged = null;
                 ClearHighlight();
@@ -127,7 +115,6 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        // Snap vào grid
         SnapToGrid(block, targetCells);
         objectBeingDragged = null;
         ClearHighlight();
@@ -140,6 +127,7 @@ public class GridManager : MonoBehaviour
     private void SnapToGrid(GameObject block, Vector3Int[] targetCells)
     {
         Vector3 firstCellCenter = tilemap.GetCellCenterWorld(targetCells[0]);
+        
         Vector3 offset = firstCellCenter - block.GetComponent<BlockData>().cells[0].position;
 
         block.GetComponent<BlockData>().isLocked = true;
@@ -157,7 +145,6 @@ public class GridManager : MonoBehaviour
         AudioManager.Instance?.PlayPlaceBlock();
     }
 
-    // --- Clear highlight ---
     private void ClearHighlight()
     {
         foreach (var pos in previousPreview)
@@ -168,7 +155,6 @@ public class GridManager : MonoBehaviour
         previousPreview.Clear();
     }
 
-    // --- Set highlight ---
     private void SetHighlight(List<Vector3Int> cells)
     {
         foreach (var pos in cells)
@@ -181,23 +167,19 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // --- Lấy preview cell positions của block dựa theo chuột ---
     public Vector3Int[] GetPreviewCells(GameObject block, Vector3 mouseWorld)
     {
         BlockData data = block.GetComponent<BlockData>();
         Vector3Int[] positions = new Vector3Int[data.cells.Count];
 
-        // Use anchor cell's local position as reference and apply local offsets via TransformVector
         Vector3Int mouseCell = tilemap.WorldToCell(mouseWorld);
         Vector3 cellCenter = tilemap.GetCellCenterWorld(mouseCell);
 
-        // If cells are stored as child transforms, use localPosition to compute offsets
         Vector3 anchorLocal = data.cells[0].localPosition;
 
         for (int i = 0; i < data.cells.Count; i++)
         {
             Vector3 localOffset = data.cells[i].localPosition - anchorLocal;
-            // Convert local offset into world-space vector considering parent's scale/rotation
             Vector3 worldOffset = block.transform.TransformVector(localOffset);
             Vector3 worldPos = cellCenter + worldOffset;
             positions[i] = tilemap.WorldToCell(worldPos);
@@ -205,13 +187,11 @@ public class GridManager : MonoBehaviour
         return positions;
     }
 
-
-    // --- Helpers ---
-    private void SetGridPosValue(Vector3Int gridPos, int v) => gridMap[gridPos] = v; // dánh dấu cell có block `1 hoặc 0
-    public bool IsCellFree(Vector3Int gridPos) => GetGridPosValue(gridPos) == 0; // kiểm tra ô còn trống không
+    private void SetGridPosValue(Vector3Int gridPos, int v) => gridMap[gridPos] = v;
+    public bool IsCellFree(Vector3Int gridPos) => GetGridPosValue(gridPos) == 0;
     public int GetGridPosValue(Vector3Int gridPos) => gridMap.TryGetValue(gridPos, out int value) ? value : 0;
 
-    public bool IsInsideGrid(Vector3Int pos) // kiểm tra có nằm trong khung 8x8 không
+    public bool IsInsideGrid(Vector3Int pos)
     {
         return pos.x >= minX && pos.x <= maxX && pos.y >= minY && pos.y <= maxY;
     }
@@ -220,17 +200,13 @@ public class GridManager : MonoBehaviour
     {
         HashSet<Vector3Int> cellsToDelete = new HashSet<Vector3Int>();
 
-        // gom ô từ hàng đầy
         CollectFullRows(cellsToDelete);
-
-        // gom ô từ cột đầy
         CollectFullCols(cellsToDelete);
 
-        // xóa tất cả ô đã gom
         if (cellsToDelete.Count > 0)
         {
             ClearCells(cellsToDelete);
-            addScore(8 * cellsToDelete.Count / 10); // ví dụ cộng điểm tỉ lệ
+            addScore(8 * cellsToDelete.Count / 10);
         }
 
         if (!CheckAllBlockPlaceable())
@@ -239,7 +215,6 @@ public class GridManager : MonoBehaviour
             GameOver();
         }
     }
-
 
     private void CollectFullRows(HashSet<Vector3Int> toDelete)
     {
@@ -264,7 +239,6 @@ public class GridManager : MonoBehaviour
         }
     }
 
-
     private void CollectFullCols(HashSet<Vector3Int> toDelete)
     {
         for (int x = minX; x <= maxX; x++)
@@ -287,7 +261,6 @@ public class GridManager : MonoBehaviour
             }
         }
     }
-
 
     private void ClearCells(HashSet<Vector3Int> toDelete)
     {
@@ -350,11 +323,10 @@ public class GridManager : MonoBehaviour
                 continue;
             }
 
-            
             foreach (Vector3Int cell in availableCells)
             {
                 Vector3 cellWorld = tilemap.GetCellCenterWorld(cell);
-                Vector3Int[] targetCells = GetPreviewCellsAtGrid(block, cell); 
+                Vector3Int[] targetCells = GetPreviewCellsAtGrid(block, cell);
                 bool canPlace = true;
                 foreach (var c in targetCells)
                 {
@@ -376,18 +348,17 @@ public class GridManager : MonoBehaviour
 
                 if (canPlace)
                 {
-
                     return true;
                 }
             }
         }
 
-            string blockList = string.Join(", ", spawnedBlocks.ConvertAll(b => b!=null?b.name:"null"));
-            if (diagBlock != null)
-            {
-                Debug.Log($"CheckAllBlockPlaceable diagnostic: first failure block={diagBlock}, anchor={diagAnchor}, failCell={diagFailCell}, gridVal={diagFailVal}, tile={diagTile}");
-            }
-            return false;
+        string blockList = string.Join(", ", spawnedBlocks.ConvertAll(b => b!=null?b.name:"null"));
+        if (diagBlock != null)
+        {
+            Debug.Log($"CheckAllBlockPlaceable diagnostic: first failure block={diagBlock}, anchor={diagAnchor}, failCell={diagFailCell}, gridVal={diagFailVal}, tile={diagTile}");
+        }
+        return false;
     }
 
     public void GameOver()
@@ -454,13 +425,12 @@ public class GridManager : MonoBehaviour
         if (bs == null && blockSpawner != null) bs = blockSpawner.GetComponent<BlockSpawner>();
         bs?.SpawnBlock();
     }
-    // --- Lấy preview cell positions của block dựa theo vị trí từng cell---
+
     public Vector3Int[] GetPreviewCellsAtGrid(GameObject block, Vector3Int anchorCell)
     {
         BlockData data = block.GetComponent<BlockData>();
         HashSet<Vector3Int> positions = new HashSet<Vector3Int>();
 
-        // Determine source cells: prefer BlockData.cells if populated; otherwise fall back to direct children
         List<Transform> sourceCells = null;
         if (data != null && data.cells != null && data.cells.Count > 0)
         {
@@ -479,14 +449,12 @@ public class GridManager : MonoBehaviour
             return System.Array.Empty<Vector3Int>();
         }
 
-        // Use local positions to avoid world rounding issues
         Transform firstCell = sourceCells[0];
         Vector3 localAnchor = firstCell.localPosition;
 
         foreach (Transform cell in sourceCells)
         {
             Vector3 localOffset = cell.localPosition - localAnchor;
-
 
             Vector3 gridOffset = new Vector3(
                 localOffset.x / tilemap.cellSize.x,

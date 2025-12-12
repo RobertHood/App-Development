@@ -98,6 +98,8 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
                 colors.normalColor = Color.white;
                 this.colors = colors;
             }
+
+            GameEvents.OnBoardChangedMethod();
         }
     }
     
