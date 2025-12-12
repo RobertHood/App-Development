@@ -16,7 +16,6 @@ public class Setting : MonoBehaviour
 
     private void Start()
     {
-        // Gán sự kiện cho nút
         backButton.onClick.AddListener(OnBackClick);
         easyButton.onClick.AddListener(() => OnDifficultyClick(10));
         mediumButton.onClick.AddListener(() => OnDifficultyClick(20));
@@ -26,14 +25,14 @@ public class Setting : MonoBehaviour
 
     private void OnBackClick()
     {
-        gameObject.SetActive(false); // Ẩn panel
+        gameObject.SetActive(false);
     }
 
     private void OnDifficultyClick(int diff)
     {
         gameLogic.NewGameWithDiff(diff);
 
-        gameObject.SetActive(false); // Ẩn panel
+        gameObject.SetActive(false); 
     }
 
     private void ToHomeClick()
@@ -41,15 +40,4 @@ public class Setting : MonoBehaviour
         SceneManager.LoadScene("All Game Menu");
     }
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void Start()
-    // {
-        
-    // }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
 }

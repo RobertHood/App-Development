@@ -25,6 +25,7 @@ public class GameLogic : MonoBehaviour
     public TMP_Text timerTxt;
     
     public GameObject settingsPanel;
+    public GameObject okPanel;
 
     private float timer;
     private bool timerRunning;
@@ -56,6 +57,12 @@ public class GameLogic : MonoBehaviour
         NewGame();
     }
 
+    public void Replay()
+    {
+        NewGame();
+        okPanel.SetActive(false);
+    }
+    
     private void NewGame()
     {
         gameover = false;
@@ -362,6 +369,9 @@ public class GameLogic : MonoBehaviour
         smileyImg.sprite = smileyWin;
         int finalTime = Mathf.FloorToInt(timer);
         PlayFabLeaderBoard.sendLeaderboard(finalTime, "minesweeper"); 
+        Ok okPan = okPanel.GetComponent<Ok>();
+        okPan.UpdateMessageWin(finalTime);
+        okPanel.SetActive(true);
     }
 
     private void Explode(Cell cell)
@@ -369,6 +379,9 @@ public class GameLogic : MonoBehaviour
         gameover = true;
         timerRunning = false;
         Debug.Log("Game Over!");
+         Ok okPan = okPanel.GetComponent<Ok>();
+        okPan.UpdateMessageLose();
+        okPanel.SetActive(true);
         smileyImg.sprite = smileyLose;
         cell.revealed = true;
         cell.exploded = true;
