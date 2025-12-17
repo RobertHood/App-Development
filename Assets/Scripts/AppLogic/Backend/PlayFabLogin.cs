@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System;
+using UnityEditor.PackageManager;
 
 public class PlayFabLogin : MonoBehaviour
 {
@@ -15,23 +18,36 @@ public class PlayFabLogin : MonoBehaviour
     public TextMeshProUGUI usernameInfo;
     public TextMeshProUGUI uid;
     public GameObject loginPanel;
+    public GameObject errorMessage;
     private string lastUsername;
     private bool isProcessing = false;
 
     public void Start()
     {
         if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId)){
-            // replace with your real TitleId if needed
             PlayFabSettings.staticSettings.TitleId = "1FFB23";
             PlayFabSettings.TitleId = "1FFB23";
         }
 
-        // If you prefer to wire the Button in code instead of the Inspector
+
         if (loginButton != null)
             loginButton.onClick.AddListener(LoginWithUsername);
+
+        if (PlayFabManager.Instance != null && PlayFabManager.Instance.IsLoggedIn)
+        {
+            loginPanel.SetActive(false);
+            usernameInfo.text = PlayFabManager.Instance.Username;
+            uid.text = "UID: " + PlayFabManager.Instance.PlayFabId;
+        }
+
+        if (PlayFabManager.Instance == null)
+        {
+            usernameInfo.text = "Guest";
+            uid.text = "UID: guest"; 
+        }
     }
 
-    // Call this from the Button OnClick or via code
+
     public void LoginWithUsername()
     {
         if (isProcessing) return;
@@ -47,7 +63,15 @@ public class PlayFabLogin : MonoBehaviour
         lastUsername = username;
         isProcessing = true;
         Debug.Log("Logging in...");
-        var request = new LoginWithPlayFabRequest { Username = username, Password = password };
+        var request = new LoginWithPlayFabRequest 
+        { 
+            Username = username, 
+            Password = password,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+            {
+                GetPlayerProfile = true
+            }
+        };
         PlayFabClientAPI.LoginWithPlayFab(request, OnLoginSuccess, OnLoginFailure);
     }
 
@@ -56,10 +80,12 @@ public class PlayFabLogin : MonoBehaviour
         isProcessing = false;
         Debug.Log("Login successful. PlayFabId: " + result.PlayFabId);
         
-        usernameInfo.text = lastUsername;
+        string displayName = result.InfoResultPayload?.PlayerProfile?.DisplayName ?? lastUsername;
+        usernameInfo.text = displayName;
         uid.text = "UID: " + result.PlayFabId;
         loginPanel.SetActive(false);
-        PlayFabManager.Instance.SetLogin(result); 
+        ShowErrorMessage("Login Successful");
+        PlayFabManager.Instance.SetLogin(result, lastUsername); 
     }
 
     private void OnLoginFailure(PlayFabError error)
@@ -67,8 +93,10 @@ public class PlayFabLogin : MonoBehaviour
         isProcessing = false;
         Debug.LogWarning("Login failed: " + error.GenerateErrorReport());
         Debug.LogWarning("Login error message: " + error.ErrorMessage);
-
-        // optional: detect missing account and auto-register
+        
+        ShowErrorMessage(error.ErrorMessage);
+        
+        
         if (error.ErrorMessage != null && error.ErrorMessage.ToLower().Contains("account not found"))
         {
             Debug.Log("Account not found — creating account...");
@@ -104,5 +132,35 @@ public class PlayFabLogin : MonoBehaviour
     private void OnRegisterFailure(PlayFabError error)
     {
         Debug.LogError("Register failed: " + error.GenerateErrorReport());
+    }
+
+    private IEnumerator FadeOutNotification()
+    {
+        CanvasGroup cg = errorMessage.GetComponent<CanvasGroup>();
+        if (cg == null)
+        {
+            cg = errorMessage.AddComponent<CanvasGroup>();
+        }
+        cg.alpha = 1f;
+        yield return new WaitForSeconds(1f); 
+        float duration = 0.5f;
+        float time = 0f;
+        while (time < duration && errorMessage != null && errorMessage.activeSelf)
+        {
+            time += Time.deltaTime;
+            cg.alpha = Mathf.Lerp(1f, 0f, time / duration);
+            yield return null;
+        }
+        if (errorMessage != null)
+        {
+            cg.alpha = 0f;
+            errorMessage.SetActive(false);
+        }
+    }
+
+    private void ShowErrorMessage(String message){
+        errorMessage.GetComponentInChildren<TextMeshProUGUI>().text = message;
+        errorMessage.SetActive(true);
+        StartCoroutine(FadeOutNotification());
     }
 }

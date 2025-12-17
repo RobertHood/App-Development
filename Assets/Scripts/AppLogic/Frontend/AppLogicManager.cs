@@ -1,8 +1,12 @@
+using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AppLogicManager : MonoBehaviour
 {
+    public GameObject errorMessage;
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -74,7 +78,11 @@ public class AppLogicManager : MonoBehaviour
     }
     public void EnableLoginPanel(GameObject loginPanel)
     {
-        loginPanel.SetActive(true);
+        if (PlayFabManager.Instance != null && PlayFabManager.Instance.IsLoggedIn)
+        {
+            ShowErrorMessage("You are already logged in!");
+        }
+        else loginPanel.SetActive(true);
     }
     public void DisableLoginPanel(GameObject loginPanel)
     {
@@ -82,11 +90,44 @@ public class AppLogicManager : MonoBehaviour
     }
     public void EnableRegisterPanel(GameObject registerPanel)
     {
-        registerPanel.SetActive(true);
+        if (PlayFabManager.Instance != null && PlayFabManager.Instance.IsLoggedIn)
+        {
+            ShowErrorMessage("You are already logged in!");
+        }
+        else registerPanel.SetActive(true);
     }
     public void DisableRegisterPanel(GameObject registerPanel)
     {
         registerPanel.SetActive(false);
     }
 
+    private IEnumerator FadeOutNotification()
+    {
+        CanvasGroup cg = errorMessage.GetComponent<CanvasGroup>();
+        if (cg == null)
+        {
+            cg = errorMessage.AddComponent<CanvasGroup>();
+        }
+        cg.alpha = 1f;
+        yield return new WaitForSeconds(1f); 
+        float duration = 0.5f;
+        float time = 0f;
+        while (time < duration && errorMessage != null && errorMessage.activeSelf)
+        {
+            time += Time.deltaTime;
+            cg.alpha = Mathf.Lerp(1f, 0f, time / duration);
+            yield return null;
+        }
+        if (errorMessage != null)
+        {
+            cg.alpha = 0f;
+            errorMessage.SetActive(false);
+        }
+    }
+
+    private void ShowErrorMessage(String message){
+        errorMessage.GetComponentInChildren<TextMeshProUGUI>().text = message;
+        errorMessage.SetActive(true);
+        StartCoroutine(FadeOutNotification());
+    }
 }
