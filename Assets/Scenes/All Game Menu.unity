@@ -3688,6 +3688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b3d10a63e040e459d99e1babde257a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AppLogicManager
+
   errorMessage: {fileID: 595733441}
 --- !u!1 &727649252
 GameObject:
@@ -9248,7 +9249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayFabManager
   PlayFabId: 
   Username: 
-  userInfoObject: {fileID: 2011546412}
+  DisplayName: 
   usernameInfo: {fileID: 632739249}
   uid: {fileID: 998017759}
 --- !u!1 &1891864055
@@ -9836,7 +9837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b3d10a63e040e459d99e1babde257a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AppLogicManager
-  errorMessage: {fileID: 0}
   errorMessage: {fileID: 0}
 --- !u!114 &1967621597
 MonoBehaviour:
