@@ -3688,6 +3688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b3d10a63e040e459d99e1babde257a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AppLogicManager
+  errorMessage: {fileID: 595733441}
 --- !u!1 &727649252
 GameObject:
   m_ObjectHideFlags: 0
@@ -5182,7 +5183,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 961718306}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1881621207}
+        m_TargetAssemblyTypeName: PlayFabLeaderBoard, Assembly-CSharp
+        m_MethodName: NextLeaderboard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &961718306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6604,7 +6617,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1881621207}
         m_TargetAssemblyTypeName: PlayFabLeaderBoard, Assembly-CSharp
-        m_MethodName: GetBlockBlastLeaderboard
+        m_MethodName: ShowCurrentLeaderboard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8901,7 +8914,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1829707319}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1881621207}
+        m_TargetAssemblyTypeName: PlayFabLeaderBoard, Assembly-CSharp
+        m_MethodName: PreviousLeaderboard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1829707319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9208,6 +9233,7 @@ MonoBehaviour:
   SudokuLBPlayerCard: {fileID: 2047205595938926533, guid: b983dce68269b224191ce9404edb38d1, type: 3}
   MinesweeperLBPlayerCard: {fileID: 2047205595938926533, guid: 79c85fa3ff7a6b442a52243d1eab0b02, type: 3}
   FlappyBirdLBPlayerCard: {fileID: 631358405329066954, guid: a9885613e0bd3904183ff343fbaf15f0, type: 3}
+  GameName: {fileID: 2028950762}
 --- !u!114 &1881621208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9222,7 +9248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayFabManager
   PlayFabId: 
   Username: 
-  DisplayName: 
+  userInfoObject: {fileID: 0}
   usernameInfo: {fileID: 632739249}
   uid: {fileID: 998017759}
 --- !u!1 &1891864055
@@ -9810,6 +9836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b3d10a63e040e459d99e1babde257a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AppLogicManager
+  errorMessage: {fileID: 0}
 --- !u!114 &1967621597
 MonoBehaviour:
   m_ObjectHideFlags: 0

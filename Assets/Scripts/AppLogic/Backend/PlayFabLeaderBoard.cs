@@ -19,7 +19,7 @@ public class PlayFabLeaderBoard : MonoBehaviour
 {
     [Header("UI")]
     public GameObject emptyLeaderboardText;
-    public Transform leaderboardContent;
+    public RectTransform leaderboardContent;
 
     [Header("Player Card Prefabs")]
     public GameObject BlockBlastLBPlayerCard;
