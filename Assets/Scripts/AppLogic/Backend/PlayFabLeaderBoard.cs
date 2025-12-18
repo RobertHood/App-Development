@@ -127,7 +127,7 @@ public class PlayFabLeaderBoard : MonoBehaviour
 
     void DisplayLeaderboard(GetLeaderboardResult result, GameObject playerCardPrefab)
     {
-        foreach (Transform child in leaderboardContent)
+        foreach (RectTransform child in leaderboardContent)
             Destroy(child.gameObject);
 
         if (result.Leaderboard == null || result.Leaderboard.Count == 0)
