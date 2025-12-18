@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class AppLogicManager : MonoBehaviour
 {
     public GameObject errorMessage;
+
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

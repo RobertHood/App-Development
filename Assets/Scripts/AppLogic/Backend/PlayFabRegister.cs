@@ -89,9 +89,7 @@ public class PlayFabRegister : MonoBehaviour
     {
         isProcessing = false;
         Debug.Log("Register: success. PlayFabId: " + result.PlayFabId);
-        ShowErrorMessage("Register successfully");
-        // Auto login after successful register
-        AutoLoginAfterRegister();
+        ShowErrorMessage("Register successfully. Go to login Panel to log in");
     }
 
     private void OnRegisterFailure(PlayFabError error)
@@ -100,32 +98,6 @@ public class PlayFabRegister : MonoBehaviour
         Debug.LogError("Register failed: " + error.GenerateErrorReport());
     }
 
-    private void AutoLoginAfterRegister()
-    {
-        string username = usernameInput != null ? usernameInput.text.Trim() : "";
-        string password = passwordInput != null ? passwordInput.text : "";
-
-        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-        {
-            Debug.LogWarning("AutoLogin: missing credentials.");
-            return;
-        }
-
-        Debug.Log("AutoLogin: attempting login for " + username);
-        var loginReq = new LoginWithPlayFabRequest { Username = username, Password = password };
-        PlayFabClientAPI.LoginWithPlayFab(loginReq, OnAutoLoginSuccess, OnAutoLoginFailure);
-    }
-
-    private void OnAutoLoginSuccess(LoginResult result)
-    {
-        Debug.Log("AutoLogin success. PlayFabId: " + result.PlayFabId);
-        // TODO: proceed to next scene / hide register UI
-    }
-
-    private void OnAutoLoginFailure(PlayFabError error)
-    {
-        Debug.LogWarning("AutoLogin failed: " + error.GenerateErrorReport());
-    }
 
     void OnDestroy()
     {

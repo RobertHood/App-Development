@@ -13,6 +13,8 @@ public class PlayFabManager : MonoBehaviour
     public GameObject userInfoObject;
     public TextMeshProUGUI usernameInfo;
     public TextMeshProUGUI uid;
+    public GameObject loginButton;
+    public GameObject logoutButton;
     private void Awake()
     {
 
@@ -33,12 +35,16 @@ public class PlayFabManager : MonoBehaviour
 
         if (PlayFabManager.Instance != null && PlayFabManager.Instance.IsLoggedIn)
         {
+            loginButton.SetActive(false);
+            logoutButton.SetActive(true);
             usernameInfo.text = PlayFabManager.Instance.Username;
             uid.text = "UID: " + PlayFabManager.Instance.PlayFabId;
         }
 
         if (PlayFabManager.Instance == null)
         {
+            loginButton.SetActive(true);
+            logoutButton.SetActive(false);
             usernameInfo.text = "Guest";
             uid.text = "UID: guest"; 
         }
@@ -48,5 +54,13 @@ public class PlayFabManager : MonoBehaviour
         PlayFabId = result.PlayFabId;
         Username = username;
         Debug.Log("Saved login session: " + PlayFabId);
+    }
+
+    public void Logout()
+    {
+        PlayFabClientAPI.ForgetAllCredentials();
+        PlayFabId = null;
+        Username = null;
+        Debug.Log("Logged out");
     }
 }

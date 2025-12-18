@@ -13,7 +13,8 @@ public class PlayFabLogin : MonoBehaviour
     // UI references — assign in Inspector
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
-    public Button loginButton;
+    public GameObject loginButton;
+    public GameObject logoutButton;
     // removed statusText UI field — using console logging instead
     public TextMeshProUGUI usernameInfo;
     public TextMeshProUGUI uid;
@@ -22,6 +23,7 @@ public class PlayFabLogin : MonoBehaviour
     private string lastUsername;
     private bool isProcessing = false;
 
+
     public void Start()
     {
         if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId)){
@@ -29,12 +31,9 @@ public class PlayFabLogin : MonoBehaviour
             PlayFabSettings.TitleId = "1FFB23";
         }
 
-
-        if (loginButton != null)
-            loginButton.onClick.AddListener(LoginWithUsername);
-
         if (PlayFabManager.Instance != null && PlayFabManager.Instance.IsLoggedIn)
         {
+
             loginPanel.SetActive(false);
             usernameInfo.text = PlayFabManager.Instance.Username;
             uid.text = "UID: " + PlayFabManager.Instance.PlayFabId;
@@ -45,6 +44,10 @@ public class PlayFabLogin : MonoBehaviour
             usernameInfo.text = "Guest";
             uid.text = "UID: guest"; 
         }
+
+        logoutButton.SetActive(PlayFabManager.Instance != null && PlayFabManager.Instance.IsLoggedIn);
+
+
     }
 
 
@@ -84,6 +87,8 @@ public class PlayFabLogin : MonoBehaviour
         usernameInfo.text = displayName;
         uid.text = "UID: " + result.PlayFabId;
         loginPanel.SetActive(false);
+        logoutButton.SetActive(true);
+        loginButton.SetActive(false);
         ShowErrorMessage("Login Successful");
         PlayFabManager.Instance.SetLogin(result, lastUsername); 
     }
@@ -162,5 +167,19 @@ public class PlayFabLogin : MonoBehaviour
         errorMessage.GetComponentInChildren<TextMeshProUGUI>().text = message;
         errorMessage.SetActive(true);
         StartCoroutine(FadeOutNotification());
+    }
+
+    public void Logout()
+    {
+        if (PlayFabManager.Instance != null)
+        {
+            PlayFabManager.Instance.Logout();
+        }
+        loginPanel.SetActive(true);
+        loginButton.SetActive(true);
+        logoutButton.SetActive(false);
+        usernameInfo.text = "Guest";
+        uid.text = "UID: guest";
+        ShowErrorMessage("Logged out");
     }
 }

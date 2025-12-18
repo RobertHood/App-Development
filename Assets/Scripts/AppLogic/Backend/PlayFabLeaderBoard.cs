@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
-using TMPro;
 
 public enum LeaderboardType
 {
