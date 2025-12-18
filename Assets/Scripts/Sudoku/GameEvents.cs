@@ -69,6 +69,39 @@ public class GameEvents : MonoBehaviour
             OnGameWon();
         }
     }
+
+    public delegate void PauseGame();
+
+    public static event PauseGame OnPauseGame;
+
+    public static void OnPauseGameMethod()
+    {
+        if (OnPauseGame != null)
+        {
+            OnPauseGame();
+        }
+    }
+
+    public delegate void ResumeGame();
+    public static event ResumeGame OnResumeGame;
+    public static void OnResumeGameMethod()
+    {
+        if (OnResumeGame != null)
+        {
+            OnResumeGame();
+        }
+    }
+
+    public delegate void ToHomeScreen();
+
+    public static event ToHomeScreen OnToHomeScreen;
+    public static void OnToHomeScreenMethod()
+    {
+        if (OnToHomeScreen != null)
+        {
+            OnToHomeScreenMethod();
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

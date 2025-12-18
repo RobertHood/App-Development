@@ -10,15 +10,6 @@ public class AppLogic : MonoBehaviour
     public Color selectedColor = Color.red;
     public Color normalColor = new Color(0.0f,40.0f,243.0f,255.0f); 
 
-    public void Replay()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-    public void BackToGameScreen()
-    {
-        SceneManager.LoadScene(SceneManager.GetSceneByName("All Game Menu").buildIndex);
-    }
-
     public void SelectDifficulty(Button clickedButton)
     {
         if (difficultyButtons == null) return;
@@ -38,7 +29,7 @@ public class AppLogic : MonoBehaviour
             case 1: SetGameMode(EGameMode.MEDIUM); break;
             case 2: SetGameMode(EGameMode.HARD); break;
             case 3: SetGameMode(EGameMode.INSANE); break;
-            default: SetGameMode(EGameMode.NOT_SET); break;
+            default: SetGameMode(EGameMode.EASY); break;
         }
     }
 
@@ -82,10 +73,10 @@ public class AppLogic : MonoBehaviour
     {
         if (Instance == null)
         {
-            DontDestroyOnLoad(this);
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
-        else Destroy(this);
+        else Destroy(this.gameObject);
     }
 
     private EGameMode _GameMode;
@@ -93,7 +84,7 @@ public class AppLogic : MonoBehaviour
     {
         _GameMode = EGameMode.NOT_SET;
 
-        // wire up buttons so each calls SelectDifficulty when clicked
+        
         if (difficultyButtons != null)
         {
             for (int i = 0; i < difficultyButtons.Count; i++)
@@ -103,7 +94,7 @@ public class AppLogic : MonoBehaviour
                 Button captured = btn; // capture for closure
                 btn.onClick.RemoveAllListeners();
                 btn.onClick.AddListener(() => SelectDifficulty(captured));
-                // initialize colors (first selected if you like)
+                
                 btn.image.color = normalColor;
             }
         }
@@ -136,5 +127,9 @@ public class AppLogic : MonoBehaviour
         Debug.LogError("game level not included");
         return " ";
     }
-
+    public void Shutdown()
+    {
+        if (Instance == this) Instance = null;
+        Destroy(this.gameObject);
+    }
 }

@@ -22,7 +22,6 @@ public class Clock : MonoBehaviour
         stopClock = false;
     }
 
-
     void Update()
     {
         if (stopClock == false)
@@ -44,6 +43,20 @@ public class Clock : MonoBehaviour
     public void OnGameOver()
     {
         stopClock = true;
+    }
+    public void OnPauseGame()
+    {
+        stopClock = true;
+    }
+
+    public void OnResumeGame()
+    {
+        stopClock = false;
+    }
+
+    public void OnGameWon()
+    {
+        stopClock = true;
         int finalTimeInSeconds = (int)delta_time;
         playFabLeaderBoard.sendLeaderboard(finalTimeInSeconds, "sudoku");
     }
@@ -51,10 +64,16 @@ public class Clock : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnGameOver += OnGameOver;
+        GameEvents.OnGameWon += OnGameWon;
+        GameEvents.OnPauseGame += OnPauseGame;
+        GameEvents.OnResumeGame += OnResumeGame;
     }
 
     private void OnDisable()
     {
         GameEvents.OnGameOver -= OnGameOver;
+        GameEvents.OnGameOver -= OnGameOver;
+        GameEvents.OnPauseGame -= OnPauseGame;
+        GameEvents.OnResumeGame -= OnResumeGame;
     }
 }

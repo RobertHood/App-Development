@@ -23,6 +23,13 @@ public class PlayFabLogin : MonoBehaviour
     private string lastUsername;
     private bool isProcessing = false;
 
+    void Awake()
+    {
+        if (usernameInput == null)
+        {
+            usernameInput = FindFirstObjectByType<TMP_InputField>();
+        }
+    }
 
     public void Start()
     {

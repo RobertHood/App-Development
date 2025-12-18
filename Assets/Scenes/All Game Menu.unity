@@ -376,7 +376,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1881621204}
+      - m_Target: {fileID: 1912964701}
         m_TargetAssemblyTypeName: PlayFabLogin, Assembly-CSharp
         m_MethodName: LoginWithUsername
         m_Mode: 1
@@ -1618,6 +1618,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -22}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &397025908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 397025910}
+  - component: {fileID: 397025909}
+  m_Layer: 0
+  m_Name: PlayFabRegister
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &397025909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397025908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb12b8bcaf063f499c2ec5a240bda70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayFabRegister
+  usernameInput: {fileID: 1268343114}
+  passwordInput: {fileID: 597103807}
+  confirmPasswordInput: {fileID: 154356295}
+  emailInput: {fileID: 771735995}
+  registerButton: {fileID: 1385869172}
+  errorMessage: {fileID: 595733441}
+--- !u!4 &397025910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397025908}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 294.7378, y: 618.46674, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &413695525
 GameObject:
   m_ObjectHideFlags: 0
@@ -5320,7 +5370,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1881621207}
+      - m_Target: {fileID: 1256526193}
         m_TargetAssemblyTypeName: PlayFabLeaderBoard, Assembly-CSharp
         m_MethodName: NextLeaderboard
         m_Mode: 1
@@ -6288,6 +6338,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138653104}
   m_CullTransparentMesh: 1
+--- !u!1 &1256526192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256526194}
+  - component: {fileID: 1256526193}
+  m_Layer: 0
+  m_Name: PlayFabLeaderboard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1256526193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256526192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd2f2cf65c5f7542907cfccf67c02ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayFabLeaderBoard
+  emptyLeaderboardText: {fileID: 1725082396}
+  leaderboardContent: {fileID: 1967621594}
+  BlockBlastLBPlayerCard: {fileID: 6976840022050097798, guid: 794a89f725169ce4b8e468deee1fbaf8, type: 3}
+  SudokuLBPlayerCard: {fileID: 2047205595938926533, guid: b983dce68269b224191ce9404edb38d1, type: 3}
+  MinesweeperLBPlayerCard: {fileID: 2047205595938926533, guid: 79c85fa3ff7a6b442a52243d1eab0b02, type: 3}
+  FlappyBirdLBPlayerCard: {fileID: 631358405329066954, guid: a9885613e0bd3904183ff343fbaf15f0, type: 3}
+  GameName: {fileID: 2028950762}
+--- !u!4 &1256526194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256526192}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 294.7378, y: 618.46674, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1268343112
 GameObject:
   m_ObjectHideFlags: 0
@@ -6751,7 +6852,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1881621207}
+      - m_Target: {fileID: 1256526193}
         m_TargetAssemblyTypeName: PlayFabLeaderBoard, Assembly-CSharp
         m_MethodName: ShowCurrentLeaderboard
         m_Mode: 1
@@ -7001,13 +7102,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 707245492}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 397025909}
+        m_TargetAssemblyTypeName: PlayFabRegister, Assembly-CSharp
+        m_MethodName: RegisterNewUser
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8835,7 +8936,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1881621204}
+      - m_Target: {fileID: 1912964701}
         m_TargetAssemblyTypeName: PlayFabLogin, Assembly-CSharp
         m_MethodName: Logout
         m_Mode: 1
@@ -9184,7 +9285,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1881621207}
+      - m_Target: {fileID: 1256526193}
         m_TargetAssemblyTypeName: PlayFabLeaderBoard, Assembly-CSharp
         m_MethodName: PreviousLeaderboard
         m_Mode: 1
@@ -9421,9 +9522,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1881621205}
-  - component: {fileID: 1881621204}
-  - component: {fileID: 1881621206}
-  - component: {fileID: 1881621207}
   - component: {fileID: 1881621208}
   m_Layer: 0
   m_Name: '[PlayFab]'
@@ -9432,26 +9530,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1881621204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881621203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8076a544c00d2314685a94f6a2b15b4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayFabLogin
-  usernameInput: {fileID: 1946084805}
-  passwordInput: {fileID: 1874352873}
-  loginButton: {fileID: 1017276407}
-  logoutButton: {fileID: 1769353958}
-  usernameInfo: {fileID: 632739249}
-  uid: {fileID: 998017759}
-  loginPanel: {fileID: 612758652}
-  errorMessage: {fileID: 595733441}
 --- !u!4 &1881621205
 Transform:
   m_ObjectHideFlags: 0
@@ -9467,43 +9545,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1881621206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881621203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb12b8bcaf063f499c2ec5a240bda70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayFabRegister
-  usernameInput: {fileID: 1268343114}
-  passwordInput: {fileID: 597103807}
-  confirmPasswordInput: {fileID: 154356295}
-  emailInput: {fileID: 771735995}
-  registerButton: {fileID: 1385869172}
-  errorMessage: {fileID: 595733441}
---- !u!114 &1881621207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881621203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dd2f2cf65c5f7542907cfccf67c02ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayFabLeaderBoard
-  emptyLeaderboardText: {fileID: 1725082396}
-  leaderboardContent: {fileID: 1967621594}
-  BlockBlastLBPlayerCard: {fileID: 6976840022050097798, guid: 794a89f725169ce4b8e468deee1fbaf8, type: 3}
-  SudokuLBPlayerCard: {fileID: 2047205595938926533, guid: b983dce68269b224191ce9404edb38d1, type: 3}
-  MinesweeperLBPlayerCard: {fileID: 2047205595938926533, guid: 79c85fa3ff7a6b442a52243d1eab0b02, type: 3}
-  FlappyBirdLBPlayerCard: {fileID: 631358405329066954, guid: a9885613e0bd3904183ff343fbaf15f0, type: 3}
-  GameName: {fileID: 2028950762}
 --- !u!114 &1881621208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9710,6 +9751,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &1912964700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1912964702}
+  - component: {fileID: 1912964701}
+  m_Layer: 0
+  m_Name: PlayFabLogin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1912964701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912964700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8076a544c00d2314685a94f6a2b15b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayFabLogin
+  usernameInput: {fileID: 1946084805}
+  passwordInput: {fileID: 1874352873}
+  loginButton: {fileID: 1017276407}
+  logoutButton: {fileID: 1769353958}
+  usernameInfo: {fileID: 632739249}
+  uid: {fileID: 998017759}
+  loginPanel: {fileID: 612758652}
+  errorMessage: {fileID: 595733441}
+--- !u!4 &1912964702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912964700}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 294.7378, y: 618.46674, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1930003834
 GameObject:
   m_ObjectHideFlags: 0
@@ -10735,3 +10828,6 @@ SceneRoots:
   - {fileID: 1881621205}
   - {fileID: 2012312069}
   - {fileID: 560308999}
+  - {fileID: 1912964702}
+  - {fileID: 397025910}
+  - {fileID: 1256526194}

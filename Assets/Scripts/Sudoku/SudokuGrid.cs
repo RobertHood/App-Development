@@ -11,10 +11,12 @@ public class SudokuGrid : MonoBehaviour
     public float square_offset = 0.0f;
     public GameObject grid_square;
     public Vector2 start_position = new Vector2(0.0f, 0.0f);
+    public GameObject WinUI;
     public float square_scale = 1.0f;
     public float square_gap = 0.1f;
     private List<GameObject> grid_squares_ = new List<GameObject>();
     private int selected_grid_data = -1;
+
 
 
     void Start()
@@ -52,9 +54,7 @@ public class SudokuGrid : MonoBehaviour
                 return;
             }
         }
-
-
-        Debug.Log("Sudoku solved! Triggering win event.");
+        WinUI.SetActive(true);
         GameEvents.OnGameWonMethod();
     }
 
@@ -79,6 +79,19 @@ public class SudokuGrid : MonoBehaviour
         }
 
         SetGridNumber(mode);
+    
+        yield return null; 
+        try
+        {
+            if (AppLogic.Instance != null)
+            {
+                AppLogic.Instance.Shutdown();
+            }
+        }
+        catch (Exception)
+        {
+          
+        }
     }
 
     private void SetGridNumber(string level)

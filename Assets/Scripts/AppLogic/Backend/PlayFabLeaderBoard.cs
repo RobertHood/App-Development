@@ -63,16 +63,16 @@ public class PlayFabLeaderBoard : MonoBehaviour
         switch (currentLeaderboard)
         {
             case LeaderboardType.BlockBlast:
-                GameName.text = "block blast";
+                GameName.text = "Block Blast";
                 break;
             case LeaderboardType.Sudoku:
-                GameName.text = "sudoku";
+                GameName.text = "Sudoku";
                 break;
             case LeaderboardType.Minesweeper:
-                GameName.text = "minesweeper";
+                GameName.text = "Minesweeper";
                 break;
             case LeaderboardType.FlappyBird:
-                GameName.text = "flappy bird";
+                GameName.text = "Flappy Bird";
                 break;
         }
     }
@@ -157,9 +157,19 @@ public class PlayFabLeaderBoard : MonoBehaviour
 
             card.transform.Find("Placement")
                 .GetComponentInChildren<TextMeshProUGUI>().text = rank.ToString();
+            string scoreText;
+            if (currentLeaderboard == LeaderboardType.Sudoku || currentLeaderboard == LeaderboardType.Minesweeper)
+            {
+                var ts = TimeSpan.FromSeconds(item.StatValue);
+                scoreText = ts.ToString(@"hh\:mm\:ss");
+            }
+            else
+            {
+                scoreText = item.StatValue.ToString();
+            }
 
             card.transform.Find("HighScore/HighScoreText")
-                .GetComponent<TextMeshProUGUI>().text = item.StatValue.ToString();
+                .GetComponent<TextMeshProUGUI>().text = scoreText;
         }
     }
 

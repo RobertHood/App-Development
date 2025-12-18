@@ -202,7 +202,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1851259581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AppLogic, Assembly-CSharp
         m_MethodName: SelectDifficulty
         m_Mode: 2
@@ -1281,6 +1281,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394756520}
   m_CullTransparentMesh: 1
+--- !u!1 &488783198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 488783200}
+  - component: {fileID: 488783199}
+  m_Layer: 0
+  m_Name: SudokuAppLogic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &488783199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488783198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece4332a2121d1d439c34eeeea620b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AppLogic
+  difficultyButtons:
+  - {fileID: 1170027706}
+  - {fileID: 53167662}
+  - {fileID: 1666473078}
+  - {fileID: 1703509105}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
+  normalColor: {r: 0, g: 0.3, b: 0.6, a: 1}
+--- !u!4 &488783200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488783198}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 294.7378, y: 618.46674, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &489312645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,7 +2529,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1851259581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AppLogic, Assembly-CSharp
         m_MethodName: SelectDifficulty
         m_Mode: 2
@@ -3282,7 +3333,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1851259581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AppLogic, Assembly-CSharp
         m_MethodName: SelectDifficulty
         m_Mode: 2
@@ -3415,7 +3466,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1851259581}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AppLogic, Assembly-CSharp
         m_MethodName: SelectDifficulty
         m_Mode: 2
@@ -3887,7 +3938,6 @@ GameObject:
   - component: {fileID: 1851259578}
   - component: {fileID: 1851259577}
   - component: {fileID: 1851259580}
-  - component: {fileID: 1851259581}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4013,25 +4063,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &1851259581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851259576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ece4332a2121d1d439c34eeeea620b3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AppLogic
-  difficultyButtons:
-  - {fileID: 1170027706}
-  - {fileID: 53167662}
-  - {fileID: 1666473078}
-  - {fileID: 1703509105}
-  selectedColor: {r: 1, g: 0, b: 0, a: 1}
-  normalColor: {r: 0, g: 0.3, b: 0.6, a: 1}
 --- !u!1 &1854279003
 GameObject:
   m_ObjectHideFlags: 0
@@ -4265,6 +4296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b3d10a63e040e459d99e1babde257a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AppLogicManager
+  errorMessage: {fileID: 0}
 --- !u!1 &2026895645
 GameObject:
   m_ObjectHideFlags: 0
@@ -4755,3 +4787,4 @@ SceneRoots:
   - {fileID: 1851259579}
   - {fileID: 393369073}
   - {fileID: 1223080016}
+  - {fileID: 488783200}
